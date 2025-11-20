@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>M. George Stellas - Portfolio</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: #0066cc;
+            --dark-blue: #003d7a;
+            --light-blue: #4da6ff;
+            --black: #0a0a0a;
+            --dark-gray: #1a1a1a;
+            --medium-gray: #2a2a2a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--black) 0%, var(--dark-blue) 100%);
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        .navbar {
+            background: rgba(10, 10, 10, 0.95) !important;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 102, 204, 0.3);
+        }
+
+        .navbar-brand {
+            font-size: 1.8rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--primary-blue), var(--light-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-link {
+            color: #fff !important;
+            margin: 0 10px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--light-blue) !important;
+            transform: translateY(-2px);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: var(--light-blue);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-link:hover::after {
+            width: 80%;
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 50%, rgba(0, 102, 204, 0.2) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 80%, rgba(77, 166, 255, 0.2) 0%, transparent 50%);
+            animation: pulse 8s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 0.8; }
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 1;
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+        }
+
+        .profile-img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            border: 5px solid var(--primary-blue);
+            box-shadow: 0 0 30px rgba(0, 102, 204, 0.5);
+            margin-bottom: 30px;
+            animation: float 3s ease-in-out infinite;
+            background: linear-gradient(135deg, var(--primary-blue), var(--light-blue));
+            margin-left: auto;
+            margin-right: auto;
+            /* Placeholder Background - Change this to your profile image URL */
+            /* background-image: url('YOUR_PROFILE_IMAGE_URL'); */
+            /* background-size: cover; */
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--light-blue), var(--primary-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            color: #aaa;
+            margin-bottom: 30px;
+        }
+
+        .social-links a {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+            background: rgba(0, 102, 204, 0.2);
+            border: 2px solid var(--primary-blue);
+            border-radius: 50%;
+            margin: 0 10px;
+            color: var(--light-blue);
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .social-links a:hover {
+            background: var(--primary-blue);
+            color: #fff;
+            transform: translateY(-5px) rotate(360deg);
+            box-shadow: 0 5px 20px rgba(0, 102, 204, 0.5);
+        }
+
+        section {
+            padding: 100px 0;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 60px;
+            background: linear-gradient(135deg, var(--light-blue), var(--primary-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, var(--primary-blue), transparent);
+        }
+
+        .card {
+            background: rgba(26, 26, 26, 0.8);
+            border: 1px solid rgba(0, 102, 204, 0.3);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary-blue);
+            box-shadow: 0 10px 30px rgba(0, 102, 204, 0.3);
+        }
+        
+        .contact-info p i {
+            width: 30px;
+            color: var(--light-blue);
+        }
+
+        .card-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--light-blue));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+
+        
+
+        .timeline {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(180deg, var(--primary-blue), var(--light-blue));
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 50px;
+            opacity: 0;
+            transition: all 0.5s ease;
+        }
+
+        .timeline-item.visible {
+            opacity: 1;
+        }
+
+        .timeline-item:nth-child(odd) {
+            padding-right: 50%;
+            text-align: right;
+            transform: translateX(-50px);
+        }
+
+        .timeline-item:nth-child(even) {
+            padding-left: 50%;
+            text-align: left;
+            transform: translateX(50px);
+        }
+
+        .timeline-item.visible {
+            transform: translateX(0);
+        }
+
+        .timeline-content {
+            background: rgba(26, 26, 26, 0.9);
+            padding: 25px;
+            border-radius: 15px;
+            border: 2px solid var(--primary-blue);
+            position: relative;
+            box-shadow: 0 5px 20px rgba(0, 102, 204, 0.2);
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content::before {
+            content: '';
+            position: absolute;
+            right: -12px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0;
+            height: 0;
+            border-left: 12px solid var(--primary-blue);
+            border-top: 12px solid transparent;
+            border-bottom: 12px solid transparent;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content::before {
+            content: '';
+            position: absolute;
+            left: -12px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0;
+            height: 0;
+            border-right: 12px solid var(--primary-blue);
+            border-top: 12px solid transparent;
+            border-bottom: 12px solid transparent;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            top: 30px;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 20px;
+            background: var(--light-blue);
+            border: 4px solid var(--black);
+            border-radius: 50%;
+            z-index: 1;
+            box-shadow: 0 0 20px rgba(77, 166, 255, 0.8);
+        }
+
+        .timeline-year {
+            display: inline-block;
+            background: var(--primary-blue);
+            color: #fff;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .project-card {
+            background: rgba(26, 26, 26, 0.8);
+            border: 1px solid rgba(0, 102, 204, 0.3);
+            border-radius: 15px;
+            padding: 30px;
+            height: 100%;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 102, 204, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .project-card:hover::before {
+            left: 100%;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary-blue);
+            box-shadow: 0 10px 30px rgba(0, 102, 204, 0.4);
+        }
+        
+        .experience-item {
+            margin-bottom: 40px;
+            padding-left: 20px;
+            border-left: 3px solid var(--primary-blue);
+        }
+        
+        .experience-item h4 {
+            color: var(--light-blue);
+            margin-bottom: 5px;
+        }
+        
+        .experience-item p {
+            color: #aaa;
+        }
+        
+        .experience-item ul {
+            list-style-type: disc;
+            padding-left: 20px;
+            color: #ccc;
+        }
+
+        .cert-badge {
+            background: rgba(26, 26, 26, 0.8);
+            border: 2px solid var(--primary-blue);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+
+        .cert-badge:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(0, 102, 204, 0.4);
+            border-color: var(--light-blue);
+        }
+
+        .cert-icon {
+            font-size: 3rem;
+            color: var(--light-blue);
+            margin-bottom: 15px;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-20px); }
+            60% { transform: translateX(-50%) translateY(-10px); }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .timeline::before {
+                left: 30px;
+            }
+            
+            .timeline-item:nth-child(odd),
+            .timeline-item:nth-child(even) {
+                padding-left: 80px;
+                padding-right: 0;
+                text-align: left;
+            }
+            
+            .timeline-dot {
+                left: 30px;
+            }
+            
+            .timeline-item:nth-child(odd) .timeline-content::before {
+                left: -12px;
+                right: auto;
+                border-left: none;
+                border-right: 12px solid var(--primary-blue);
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#home">M.GeorgeStellas</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#experience">Experience</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#achievements">Achievements</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <div > <img src="./George.jpg" class="profile-img" alt=""></div>
+            <h1>M. George Stellas</h1>
+            <p>Computer Science Undergraduate & Software Developer</p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="mailto:GeorgeStellas@email.com"><i class="fas fa-envelope"></i></a>
+                <a href="tel:+918300714409"><i class="fas fa-phone"></i></a>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <i class="fas fa-chevron-down" style="font-size: 2rem; color: var(--light-blue);"></i>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <p style="font-size: 1.1rem; line-height: 1.8; color: #ccc;">
+                            Results-driven Computer Science undergraduate with a strong foundation in Python, SQL, web technologies, and AR/VR development. Experienced in designing and deploying responsive websites, real-time applications, and 3D content using Unity and Blender. Passionate about exploring emerging technologies, contributing to open-source projects, and building solutions that improve user experience and operational efficiency.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-md-6">
+                    <div class="card">
+                        <h3 style="color: var(--light-blue); margin-bottom: 15px;">Education</h3>
+                        <p style="color: #fff; margin-bottom: 5px; font-weight: bold;">B.E. Computer Science & Engineering</p>
+                        <p style="color: #aaa;">Holycross Engineering College, India</p>
+                        <p style="color: var(--light-blue); font-size: 0.9rem;">2022 – 2026 | CGPA: 8.23/10</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card contact-info">
+                        <h3 style="color: var(--light-blue); margin-bottom: 15px;">Contact & Info</h3>
+                        <p style="color: #ccc;"><i class="fas fa-map-marker-alt"></i> Thoothukudi, India</p>
+                        <p style="color: #ccc;"><i class="fas fa-phone-alt"></i> +91 83007 14409</p>
+                        <p style="color: #ccc;"><i class="fab fa-github"></i> GeorgeStellas</p>
+                        <p style="color: #ccc;"><i class="fab fa-linkedin"></i> george-stellas-m2005</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills">
+        <div class="container">
+            <h2 class="section-title"><i class="fas fa-code"></i> Skills</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card">
+                        <h3 style="color: var(--light-blue); margin-bottom: 15px;">Technical Skills</h3>
+                        <ul style="color: #ccc; list-style-type: none; padding-left: 0;">
+                            <li><i class="fas fa-check-circle" style="color: var(--primary-blue); margin-right: 10px;"></i>Python</li>
+                            <li><i class="fas fa-check-circle" style="color: var(--primary-blue); margin-right: 10px;"></i>SQL</li>
+                            <li><i class="fas fa-check-circle" style="color: var(--primary-blue); margin-right: 10px;"></i>C</li>
+                            <li><i class="fas fa-check-circle" style="color: var(--primary-blue); margin-right: 10px;"></i>HTML / CSS / JavaScript</li>
+                             <li><i class="fas fa-check-circle" style="color: var(--primary-blue); margin-right: 10px;"></i>PHP</li>
+                            <li><i class="fas fa-check-circle" style="color: var(--primary-blue); margin-right: 10px;"></i>React.js</li>
+                            <li><i class="fas fa-check-circle" style="color: var(--primary-blue); margin-right: 10px;"></i>Bootstrap</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <h3 style="color: var(--light-blue); margin-bottom: 15px;">Platforms</h3>
+                        <ul style="color: #ccc; list-style-type: none; padding-left: 0;">
+                            <li><i class="fas fa-check-circle" style="color: var(--primary-blue); margin-right: 10px;"></i>Unity</li>
+                            <li><i class="fas fa-check-circle" style="color: var(--primary-blue); margin-right: 10px;"></i>AR Frameworks</li>
+                            <li><i class="fas fa-check-circle" style="color: var(--primary-blue); margin-right: 10px;"></i>WordPress</li>
+                            <li><i class="fas fa-check-circle" style="color: var(--primary-blue); margin-right: 10px;"></i>LLM Integration</li>
+                            <li><i class="fas fa-check-circle" style="color: var(--primary-blue); margin-right: 10px;"></i>Arduino</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <h3 style="color: var(--light-blue); margin-bottom: 15px;">Tools</h3>
+                        <ul style="color: #ccc; list-style-type: none; padding-left: 0;">
+                            <li><i class="fas fa-check-circle" style="color: var(--primary-blue); margin-right: 10px;"></i>Blender 3D</li>
+                            <li><i class="fas fa-check-circle" style="color: var(--primary-blue); margin-right: 10px;"></i>Visual Studio Code</li>
+                            <li><i class="fas fa-check-circle" style="color: var(--primary-blue); margin-right: 10px;"></i>MySQL</li>
+                            <li><i class="fas fa-check-circle" style="color: var(--primary-blue); margin-right: 10px;"></i>Linux</li>
+                            <li><i class="fas fa-check-circle" style="color: var(--primary-blue); margin-right: 10px;"></i>Hostinger server management</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="experience">
+        <div class="container">
+            <h2 class="section-title"><i class="fas fa-briefcase"></i> Professional Experience</h2>
+            <div class="row">
+                <div class="col-lg-10 mx-auto">
+                    <div class="card experience-item">
+                        <h4 style="color: var(--light-blue);">Software Engineering Intern</h4>
+                        <p style="font-style: italic; color: #aaa;">DoozyInfo Software Solutions | Jul 2025 – Present</p>
+                        <ul>
+                            <li>Collaborated in a 3-member agile team to deliver real-time client projects using PHP, SQL, and server-side deployment.</li>
+                            <li>Managed and executed website and application deployments on Hostinger servers.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <div class="container">
+            <h2 class="section-title"><i class="fas fa-laptop-code"></i> Key Projects</h2>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="project-card">
+                        <span class="timeline-year">Mar 2025</span>
+                        <h3 style="color: var(--light-blue); margin-top: 10px; margin-bottom: 15px;">Augmented Reality Application Prototype</h3>
+                        <p style="color: #aaa; margin-bottom: 20px;">Built an AR application prototype visualizing 2D blueprints in 3D space using Unity and AR frameworks; proposed productization for educational and industrial use cases. [Demo Files]</p>
+                        <p style="color: var(--light-blue); font-size: 0.9rem;">
+                            <i class="fas fa-tag"></i> Unity, AR Frameworks, C#, 3D Modeling (Blender)
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="project-card">
+                        <span class="timeline-year">Dec 2024</span>
+                        <h3 style="color: var(--light-blue); margin-top: 10px; margin-bottom: 15px;">KartisTech Portfolio Website</h3>
+                        <p style="color: #aaa; margin-bottom: 20px;">Developed and deployed a responsive WordPress portfolio site for a YouTube creator to showcase content and sell digital assets. [Link]</p>
+                        <p style="color: var(--light-blue); font-size: 0.9rem;">
+                            <i class="fas fa-tag"></i> WordPress, PHP, CSS, Hostinger Management
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="project-card">
+                        <span class="timeline-year">Oct 2024</span>
+                        <h3 style="color: var(--light-blue); margin-top: 10px; margin-bottom: 15px;">College Symposium Website</h3>
+                        <p style="color: #aaa; margin-bottom: 20px;">Designed and deployed a fully responsive symposium website using HTML, CSS, JavaScript, and Bootstrap, enabling 500+ student registrations. [Link]</p>
+                        <p style="color: var(--light-blue); font-size: 0.9rem;">
+                            <i class="fas fa-tag"></i> HTML, CSS, JavaScript, Bootstrap, Frontend Design
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+   <section id="achievements">
+        <div class="container">
+            <h2 class="section-title"><i class="fas fa-trophy"></i> Awards & Achievements</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-year">Oct 2025</span>
+                        <h3 style="color: var(--light-blue); margin: 10px 0;">1st Prize – Paper Presentation and Pacman Typing</h3>
+                        <p style="color: #aaa;">Presented our innovative augmented reality application idea and won first prize in the paper presentation category, along with winning 1st prize for speed and accuracy in the Pacman Typing competition.</p>
+                        <p style="color: var(--light-blue); margin-top: 10px;"><i class="fas fa-microscope"></i> Research & Speed Typing</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-year">Sep 2025</span>
+                        <h3 style="color: var(--light-blue); margin: 10px 0;">2nd Prize – Tek Cluster ’23 “Bid to Build”</h3>
+                        <p style="color: #aaa;">Developed a strategic bidding solution and implemented it through efficient coding, outperforming 18 teams at Kongunadu Engineering College of Technology.</p>
+                        <p style="color: var(--light-blue); margin-top: 10px;"><i class="fas fa-code"></i> Competitive Coding / Strategy</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-year">Mar 2025</span>
+                        <h3 style="color: var(--light-blue); margin: 10px 0;">1st Prize – Anna University Regional Campus Symposium</h3>
+                        <p style="color: #aaa;">Presented an innovative educational application idea widely applicable to both academia and industry; awarded 2000 cash prize.</p>
+                        <p style="color: var(--light-blue); margin-top: 10px;"><i class="fas fa-lightbulb"></i> Innovation & Presentation</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-year">Aug 2024</span>
+                        <h3 style="color: var(--light-blue); margin: 10px 0;">1st Prize – StartupTN Event</h3>
+                        <p style="color: #aaa;">Secured top position in a two-round technical startup quiz, demonstrating strong analytical and domain knowledge.</p>
+                        <p style="color: var(--light-blue); margin-top: 10px;"><i class="fas fa-brain"></i> Technical Quiz / Domain Knowledge</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-year">Mar 2024</span>
+                        <h3 style="color: var(--light-blue); margin: 10px 0;">1st Prize – Xtreme 2K24 Symposium</h3>
+                        <p style="color: #aaa;">Won a code debugging competition at Francis Xavier Engineering College by identifying and solving bugs.</p>
+                        <p style="color: var(--light-blue); margin-top: 10px;"><i class="fas fa-bug"></i> Code Debugging</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="languages">
+        <div class="container">
+            <h2 class="section-title"><i class="fas fa-globe"></i> Languages</h2>
+            <div class="row">
+                <div class="col-lg-6 mx-auto">
+                    <div class="card text-center">
+                        <div class="row">
+                            <div class="col-6">
+                                <h4 style="color: var(--light-blue);">Tamil</h4>
+                                <p style="color: #aaa;">Read, Speak, & Write</p>
+                            </div>
+                            <div class="col-6">
+                                <h4 style="color: var(--light-blue);">English</h4>
+                                <p style="color: #aaa;">Read, Speak, & Write</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer style="padding: 30px 0; text-align: center; border-top: 1px solid rgba(0, 102, 204, 0.3);">
+        <div class="container">
+            <p style="color: #aaa; margin: 0;">© 2025 M. George Stellas. Built with HTML, Bootstrap & JavaScript</p>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Intersection Observer for Section Fade-In (adding 'visible' class)
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !entry.target.classList.contains('visible')) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe sections and timeline items
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+
+        document.querySelectorAll('.timeline-item').forEach(item => {
+            observer.observe(item);
+        });
+
+        
+    </script>
+</body>
+</html>
